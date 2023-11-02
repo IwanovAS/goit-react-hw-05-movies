@@ -1,0 +1,19 @@
+.input {
+  height: 25px;
+  min-width: 235px;
+  font-size: large;
+  padding: 0px 5px;
+}
+
+.searchBtn {
+  height: 29px;
+  font-size: large;
+  border: none;
+  border-radius: 3px;
+  padding: 0px 5px;
+  background-color: rgb(0, 153, 255);
+}
+
+.searchBtn:hover {
+  background-color: rgb(0, 195, 255);
+}

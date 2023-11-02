@@ -1,0 +1,13 @@
+import * as API from '../api/apiMoviedb';
+import { useEffect, useState } from 'react';
+
+export const useMovieDetails = movieId => {
+  const [movieDetails, setMovieDetails] = useState([]);
+
+  useEffect(() => {
+    API.getMovieDetails(movieId).then(movieDetailsReturnedFromApi =>
+      setMovieDetails(movieDetailsReturnedFromApi)
+    );
+  }, [movieId]);
+  return { movieDetails };
+};

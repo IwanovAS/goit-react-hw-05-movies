@@ -8,6 +8,9 @@ import {
 import { useMovieDetails } from 'utils/hooks/useMovieDetails';
 import { Loader } from 'components/Loader/Loader';
 
+const defaultImg =
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const { movieDetails, loading, error } = useMovieDetails(movieId);
@@ -19,11 +22,11 @@ const MovieDetailsPage = () => {
   };
 
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (error) {
-    return <p>Something went wrong</p>
+    return <p>Something went wrong</p>;
   }
 
   return (
@@ -40,7 +43,14 @@ const MovieDetailsPage = () => {
       </h2>
 
       <img
-        src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieDetails.poster_path}`}
+        src={
+          movieDetails.poster_path
+            ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2${movieDetails.poster_path}`
+            : defaultImg
+        }
+        onError={e => {
+          e.target.src = defaultImg;
+        }}
         alt="{movieDetails.original_title}"
       />
 

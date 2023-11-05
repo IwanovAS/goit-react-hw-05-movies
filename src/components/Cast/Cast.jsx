@@ -1,5 +1,8 @@
 import { useParams } from 'react-router-dom';
-import {useMovieCredits} from 'utils/hooks/useMovieCredits';
+import { useMovieCredits } from 'utils/hooks/useMovieCredits';
+
+const defaultImg =
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -12,8 +15,15 @@ const Cast = () => {
           return (
             <li key={cast.id}>
               <img
-                width={100}
-                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${cast.profile_path}`}
+                src={
+                  cast.profile_path
+                    ? `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${cast.profile_path}`
+                    : defaultImg
+                }
+                onError={e => {
+                  e.target.src = defaultImg;
+                }}
+                width={250}
                 alt={cast.name}
               />
               <p>{cast.name}</p>

@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 
@@ -8,6 +8,8 @@ const Movies = lazy(() => import('../pages/Movies'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
+const Loader = lazy(() => import('./Loader/Loader'));
+
 
 export const App = () => {
   return (
@@ -30,3 +32,13 @@ export const App = () => {
     </div>
   );
 };
+
+function AppWithSuspense() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <App />
+    </Suspense>
+  );
+}
+
+export default AppWithSuspense;

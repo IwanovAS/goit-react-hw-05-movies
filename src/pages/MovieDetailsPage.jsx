@@ -6,16 +6,25 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { useMovieDetails } from 'utils/hooks/useMovieDetails';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const { movieDetails } = useMovieDetails(movieId);
+  const { movieDetails, loading, error } = useMovieDetails(movieId);
 
   const location = useLocation();
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(location.state.from);
   };
+
+  if (loading) {
+    return <Loader />
+  }
+
+  if (error) {
+    return <p>Something went wrong</p>
+  }
 
   return (
     <div>
